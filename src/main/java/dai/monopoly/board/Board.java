@@ -12,7 +12,7 @@ public class Board {
 	private Map<Player, Tile> playerPositions;
 	
 	/**
-	 * Initializes the board
+	 * Initializes the board with it's tiles. Gets called in Gamemaster
 	 * @param orderedTiles is a list of the tiles in monopoly, from the Initial tile, all the way to the last
 	 */
 	public Board(Tile[] orderedTiles)  { //probably load the orderedTiles from a File OR create the table here based on Tile.position
