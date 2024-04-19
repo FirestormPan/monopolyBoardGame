@@ -37,6 +37,7 @@ public class Player {
 		balance = balance + payment;
 		playerStatus(balance);
 		return balance;
+    
 	}
 	
 	public void payRentTo(Player landowner,int rent) {
