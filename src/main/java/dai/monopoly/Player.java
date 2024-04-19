@@ -34,7 +34,7 @@ public class Player {
 	}
 	
 	public int changeBalanceBy(int payment) {
-		balance = balance - payment;
+		balance = balance + payment;
 		playerStatus(balance);
 		return balance;
 	}
