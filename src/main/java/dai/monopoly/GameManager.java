@@ -4,14 +4,16 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import dai.monopoly.board.Tile;
+
 public class GameManager {
 
 	Queue<Player> activePlayers = new LinkedList<>();
 	
 	public GameManager(){
-		activePlayers.add(new Player("green"));
-		activePlayers.add(new Player("red"));
-		activePlayers.add(new Player("yellow"));
+//		activePlayers.add(new Player("green"));
+//		activePlayers.add(new Player("red"));
+//		activePlayers.add(new Player("yellow"));
 	}
 		
 	
@@ -23,19 +25,31 @@ public class GameManager {
 			//make actions for them (Here or on Board Class?)
 			maketurnMovesFor(turnPlayer);			
 			//if player didnt lose, put player back to queue
+			// if( turnPlayer is in game)
 			activePlayers.add(turnPlayer);
-				
-			
 			conditionForEnd = activePlayers.size()>1;
 		}
 	}
 	
-	public void maketurnMovesFor(Player player) { //(Here or on Board Class?)
+	public void maketurnMovesFor(Player player) {
+		throw new UnsupportedOperationException("Feature under development");
 		//roll dice --> get out of jail, if jailed dont move etc
-		rollDice();
-		//move (Board)
+		int[] diceResults = rollDice();
+		// check for jailed
+		if(player.isJailed()) { //TODO: make function on player
+		// TODO: kapws na blepoume kai an einai o tritos gyros tou, giati alliws bgainei(check the rukes on monopoly about getting out of jail)
+			player.setJailedStatus( diceResults[0] != diceResults[1] ); //TODO: make function on player
+			//TODO: what happens after you get out of Jail(with doubleRoll or paying)?
+		}
+		//move (Board)                                          
+		Tile landingTile;
 		//do  landing actions
+		landingTile.landingActions(player);
 		// if it was a double roll, play again
+		if(diceResults[0] == diceResults[1]) { 
+		//TODO: stis poses diples zaries pame fyllakh? na to baloume?
+			maketurnMovesFor(player);
+		}
 	}
 	
 	public int[] rollDice() {
