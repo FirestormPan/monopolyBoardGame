@@ -11,7 +11,7 @@ public class Tax extends Tile {
 
 	@Override
 	public void landingActions(Player rechiverOfActions) {
-		// TODO Auto-generated method stub
+
 
 	}
 

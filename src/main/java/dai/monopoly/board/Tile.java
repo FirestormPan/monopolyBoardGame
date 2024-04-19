@@ -5,7 +5,6 @@ public abstract class Tile {
 	String name;
 	int position;
 		
-	
 	public Tile(String name, int position) {
 		this.name = name;
 		this.position = position;
