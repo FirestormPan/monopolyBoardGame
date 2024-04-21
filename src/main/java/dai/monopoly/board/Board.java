@@ -34,7 +34,7 @@ public class Board {
 		int oldPosition = playerPositions.get(playerToMove);
 		int newPosition = (oldPosition  + steps)% tiles.length;
 		boolean passedStart = newPosition < oldPosition;
-		if(passedStart) {playerToMove.changeBalanceBy(-200); } //an perasei apo thn afaithria pare 200
+		if(passedStart) {playerToMove.changeBalanceBy(200); } //an perasei apo thn afaithria pare 200
 		
 		return this.tiles[newPosition];
 	}

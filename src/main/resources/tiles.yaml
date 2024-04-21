@@ -1,0 +1,9 @@
+Tiles:
+  Properties:
+    Buildables:
+      - 1:
+          colour: brown
+          name: Harilaou
+          price: 60
+          housePrice: 20
+          rent: 25
