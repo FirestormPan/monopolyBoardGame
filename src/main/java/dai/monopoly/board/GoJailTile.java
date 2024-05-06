@@ -4,6 +4,8 @@ import dai.monopoly.Player;
 
 public class GoJailTile extends Tile {
 
+  public GoJailTile(){}
+
 	public GoJailTile(String name ,int position) {
 		super(name, position);
 	}
@@ -14,6 +16,6 @@ public class GoJailTile extends Tile {
 		throw new UnsupportedOperationException("Feature under development");
 	}
 
-	
-	
+
+
 }

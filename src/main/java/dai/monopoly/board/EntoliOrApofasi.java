@@ -4,6 +4,8 @@ import dai.monopoly.Player;
 
 public class EntoliOrApofasi extends Tile {
 
+  public EntoliOrApofasi(){}
+
 	public EntoliOrApofasi(String name, int position) {
 		super(name, position);
 		// TODO Auto-generated constructor stub

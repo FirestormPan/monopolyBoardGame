@@ -1,19 +1,19 @@
 package dai.monopoly;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-
-import dai.monopoly.board.Board;
+import dai.monopoly.board.Tile;
 
 public class App {
 
   public static void main(String[] args) {
-	  
-//	  Board board = new Board();
-	  GameManager gm = new GameManager();
-	  gm.getTheGameRunningBre();
+
+    GameManager gm = new GameManager();
+    for (Tile tile: gm.board.getTiles()){
+      if (tile != null)
+      System.out.println("Tile "+ tile.getPosition() + ": " + tile.getName());
+    }
+//	  gm.getTheGameRunningBre();
+//    App.test();
+
 
   }
-
 }

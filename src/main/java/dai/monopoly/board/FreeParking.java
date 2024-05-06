@@ -2,9 +2,10 @@ package dai.monopoly.board;
 
 import dai.monopoly.Player;
 
-public class Freeparking extends Tile {
+public class FreeParking extends Tile {
+  public FreeParking(){}
 
-	public Freeparking(String name, int position) {
+	public FreeParking(String name, int position) {
 		super(name, position);
 		// TODO Auto-generated constructor stub
 	}

@@ -1,4 +1,3 @@
-##8eloume ola ta tiles ths monopolhs. h seira den exei shmasia, alla 8eloume to id(1,2.. klp) na einai swsto,KAI na mpoune sthn swsth kathgoria(p.x. buildables)
 properties:
   buildables:
     - position: 1
@@ -6,7 +5,7 @@ properties:
       name: Harilaou
       price: 60
       housePrice: 20
-      rentPricesPerHouse:
+      rent:
         - 20
         - 25
         - 35
@@ -18,7 +17,7 @@ properties:
       name: Pylaia
       price: 65
       housePrice: 20
-      rentPricesPerHouse:
+      rent:
         - 20
         - 35
         - 50
@@ -29,20 +28,6 @@ properties:
       name: larisis
       price: 200
   companies: []
-entoles:
-  - position: 2
-    name: Apofasi
-  - position: 8
-    name: Entoli
 start:
   position: 0
   name: Start
-prison:
-  position: 10
-  name: Prison
-freeParking:
-  position: 14
-  name: Park Free
-goToJail:
-  position: 23
-  name: Go To Jail!
