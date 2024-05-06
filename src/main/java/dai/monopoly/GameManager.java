@@ -27,33 +27,26 @@ public class GameManager {
     //generateGui(Board, activePlayers)
 	}
 
-  private Queue<Player> insetPayers() {
 
-    //get the insertion of players and create them
-
-
-      //    activePlayers.add(new Player("green"));
-      //		activePlayers.add(new Player("red"));
-      //		activePlayers.add(new Player("yellow"));
-    return null;
-  }
-
-
+  /**
+   * Runs through a queue of players until there is only one player remaining in the game
+   */
   public void getTheGameRunningBre() {
 		boolean conditionForEnd = false;
 		while( !conditionForEnd ) {
 			//determine turn player
 			Player turnPlayer = activePlayers.remove();
 			//make actions for them
-      makeTurnMovesFor(turnPlayer);
+      makeTurnMovesFor(turnPlayer, 1);
 			//if player didnt lose, put player back to queue
-			// if( turnPlayer is in game)
-			activePlayers.add(turnPlayer);
+      if( turnPlayer.isInGame() ){
+        activePlayers.add(turnPlayer);
+      }
 			conditionForEnd = activePlayers.size()>1;
 		}
 	}
 
-	public void makeTurnMovesFor(Player player) {
+	public void makeTurnMovesFor(Player player, int consecutiveTimePlaying) {
 		//roll dice --> get out of jail, if jailed don't move etc
 		int[] diceResults = rollDice();
 		// check for jailed
@@ -71,8 +64,12 @@ public class GameManager {
 		landingTile.landingActions(player);
 		// if it was a double roll, play again
 		if(diceResults[0] == diceResults[1]) {
-		//TODO: stis poses diples zaries pame fyllakh? na to baloume?
-      makeTurnMovesFor(player);
+      consecutiveTimePlaying++;
+      if(consecutiveTimePlaying == 3){ //third time you roll doubles, go to Jail
+        player.setIsPrisoned(true);
+      }else{
+        makeTurnMovesFor(player, consecutiveTimePlaying);
+      }
 		}
 	}
 
@@ -83,7 +80,18 @@ public class GameManager {
 		};
 	}
 
-	public BoardModel getTilesFromFile(){
+
+  private Queue<Player> insetPayers() {
+    //get the insertion of players and create them
+
+    //    activePlayers.add(new Player("green"));
+    //		activePlayers.add(new Player("red"));
+    //		activePlayers.add(new Player("yellow"));
+    return null;
+  }
+
+
+  public BoardModel getTilesFromFile(){
     BoardModel tiles = null;
     try{
       File tilesFile = new File("C:\\Users\\pante\\eclipse-workspace\\monopoly\\src\\main\\resources\\tiles.yaml");

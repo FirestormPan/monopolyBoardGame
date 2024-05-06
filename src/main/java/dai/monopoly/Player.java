@@ -13,7 +13,7 @@ public class Player {
   @Getter @Setter
 	private int position;
 	private List<Property> ownerships;
-	private boolean isInGame;
+  private boolean isInGame;
 	private boolean isPrisoned;
 
 	public Player(int id, int position) {
@@ -56,10 +56,20 @@ public class Player {
 
   public boolean setIsPrisoned(boolean prisoned) {
     isPrisoned = prisoned;
+    this.position=10;
     return prisoned;
   }
 
   public boolean isJailed(){
     return this.isPrisoned;
   }
+
+  public boolean isInGame() {
+    return isInGame;
+  }
+
+  public void setInGame(boolean inGame) {
+    isInGame = inGame;
+  }
+
 }
