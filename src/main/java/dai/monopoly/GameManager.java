@@ -46,17 +46,28 @@ public class GameManager {
 		}
 	}
 
+  /**
+   * Everything that needs to be done for the player in turn. Roll dice, move(if not Jailed), etc...
+   * @param player player having his turn
+   * @param consecutiveTimePlaying : how many times has the player played in a row(double rolls)? Useful for sending them in Jail after 3 double rolls
+   */
 	public void makeTurnMovesFor(Player player, int consecutiveTimePlaying) {
-		//roll dice --> get out of jail, if jailed don't move etc
 		int[] diceResults = rollDice();
+
 		// check for jailed
 		if(player.isJailed()) {
-//		// TODO: kapws na blepoume kai an einai o tritos gyros tou, giati alliws bgainei?(check the rules on monopoly about getting out of jail)
-			boolean gotOutOfJail = player.setIsPrisoned( diceResults[0] != diceResults[1] );
-      if(!gotOutOfJail){
-        //TODO: offer the player the option to pay and get out. When does the player get to choose about this?
+      //ask player to pay for getting out of jail
+      askPayToUnJail(player); //maybe replace with a function in Player class, that is always available to call from GUI
+      //if they didn't pay to get out of Jail, roll dice for getting out
+      if(player.isJailed()){
+			 player.setIsPrisoned( diceResults[0] != diceResults[1] );
+        if(player.isJailed()){ //if they are still jailed, it means the dice results are not the same, so end their turn
+          return;
+        }else{ //if they are the same results(and he got out of jail), play again because of the double roll
+          diceResults=rollDice();
+        }
       }
-//			//TODO: what happens after you get out of Jail(with doubleRoll or paying)?
+
 		}
 
 		Tile landingTile = board.movePlayerBy(player, (diceResults[0] + diceResults[1]) );;
@@ -73,6 +84,16 @@ public class GameManager {
 		}
 	}
 
+  public boolean askPayToUnJail(Player player){
+    // ask in gui for paying
+    boolean playerWantsToPay = true; //TODO: ask for changing from the console or GUI
+    if(playerWantsToPay) {
+      player.setIsPrisoned(false);
+      player.changeBalanceBy(-100); //or however much it is to be paid for getting out
+    }
+    return playerWantsToPay;
+  }
+
 	public int[] rollDice() {
 		return new int [] {
 			(int) Math.ceil(Math.random() * 6), //Math.random doesn't return 0 ever, so we good
@@ -80,16 +101,16 @@ public class GameManager {
 		};
 	}
 
-
+  /**
+   * @return the list of the players who are partaking the game
+   */
   private Queue<Player> insetPayers() {
     //get the insertion of players and create them
-
     //    activePlayers.add(new Player("green"));
     //		activePlayers.add(new Player("red"));
     //		activePlayers.add(new Player("yellow"));
     return null;
   }
-
 
   public BoardModel getTilesFromFile(){
     BoardModel tiles = null;

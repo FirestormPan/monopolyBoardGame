@@ -1,26 +1,21 @@
 package dai.monopoly.board;
 
-
-import java.util.Map;
-
 import dai.monopoly.Player;
 import dai.monopoly.board.models.BoardModel;
 import dai.monopoly.board.properties.Buildable;
 import dai.monopoly.board.properties.Company;
 import dai.monopoly.board.properties.TrainProperty;
+import lombok.Getter;
 
 public class Board {
 
   private final int SIZE_OF_BOARD = 36;
 
 
+  @Getter
   private Tile[] tiles= new Tile[SIZE_OF_BOARD]; //is a list of the tiles in monopoly, from the Initial tile, all the way to the last
 
-  public Tile[] getTiles() {
-    return tiles;
-  }
-
-	/**
+  /**
 	 * Initializes the board with its tiles. Gets called in Gamemaster
 	 * @param boardModel the model from which the tiles will be extracted
 	 */
@@ -57,7 +52,7 @@ public class Board {
 
 	/**
 	 * Moves a player by "steps" amount of tiles. If they pass from the Start, they gain 200.
-	 * @param playerToMove
+	 * @param playerToMove :
 	 * @param steps is the combined number of dice, therefore how much to move on board
 	 * @return the tile on which the player ends their movement on
 	 */

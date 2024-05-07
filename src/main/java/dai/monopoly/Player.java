@@ -56,7 +56,9 @@ public class Player {
 
   public boolean setIsPrisoned(boolean prisoned) {
     isPrisoned = prisoned;
-    this.position=10;
+    if(prisoned){
+      this.position=10;
+    }
     return prisoned;
   }
 
