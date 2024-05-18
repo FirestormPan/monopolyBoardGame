@@ -8,6 +8,7 @@ import java.util.List;
 public class BoardModel {
   private PropertiesModel properties;
   private List<EntoliOrApofasi> entoles;
+  private List<Tax> taxes;
   private Start start;
   private Jail prison;
   private FreeParking freeParking;
@@ -15,6 +16,14 @@ public class BoardModel {
 
 
   public BoardModel() {
+  }
+
+  public List<Tax> getTaxes() {
+    return taxes;
+  }
+
+  public void setTaxes(List<Tax> taxes) {
+    this.taxes = taxes;
   }
   public List<EntoliOrApofasi> getEntoles() {
     return entoles;

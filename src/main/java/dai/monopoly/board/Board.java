@@ -38,6 +38,9 @@ public class Board {
     for (Company cProperty : boardModel.getProperties().getCompanies()){
       this.tiles[cProperty.getPosition()] = cProperty;
     }
+    for (Tax tax : boardModel.getTaxes()){
+      this.tiles[tax.getPosition()] = tax;
+    }
 	}
 
 	public void movePlayerTo(Player playerToMove, Tile destination) {

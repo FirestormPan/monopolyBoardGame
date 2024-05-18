@@ -38,7 +38,7 @@ public class GameManager {
 			Player turnPlayer = activePlayers.remove();
 			//make actions for them
       makeTurnMovesFor(turnPlayer, 1);
-			//if player didnt lose, put player back to queue
+			//if player didn't lose, put player back to queue
       if( turnPlayer.isInGame() ){
         activePlayers.add(turnPlayer);
       }
@@ -94,7 +94,7 @@ public class GameManager {
     return playerWantsToPay;
   }
 
-	public int[] rollDice() {
+	public static int[] rollDice() {
 		return new int [] {
 			(int) Math.ceil(Math.random() * 6), //Math.random doesn't return 0 ever, so we good
 			(int) Math.ceil(Math.random() * 6)

@@ -3,6 +3,8 @@ package dai.monopoly.board.properties;
 import dai.monopoly.Player;
 import dai.monopoly.board.Tile;
 
+import java.util.Scanner;
+
 public abstract class Property extends Tile{
 
   private int price;
@@ -13,12 +15,31 @@ public abstract class Property extends Tile{
 	public Property(String name, int position, int price) {
 		super(name, position);
 		this.price = price;
+    this.owner = null;
 	}
 
 	public void landingActions(Player rechiverOfActions) {
-		//if (owned by other), pay rent
+
+    Scanner myScanner = new Scanner(System.in);  // Create a Scanner object
+
+    if(owner == null){
+      System.out.println("Would you like to buy the property " + this.getName() + " . Press y to buy"); //todo: delete after teh gui is implemented
+      String decision = myScanner.nextLine();
+      boolean playerWantsToBuy = decision.equals("y");
+      if(playerWantsToBuy){
+        if (rechiverOfActions.getBalance() > this.price){
+          rechiverOfActions.changeBalanceBy(-price);
+          this.setOwner(rechiverOfActions);
+          rechiverOfActions.getOwnerships().add(this);
+        }
+      }
+    }else if(owner == rechiverOfActions){
+		  //else if(owned by me), build? idk we should check rules (if building requires landin on it, then move to buildables)
+    }else{  //owned by another player
+      rechiverOfActions.payRentTo(this.owner, this.determinRent());
+    }
+
 		//else if(not owned), ask player about buying it
-		//else if(owned by me), build? idk we should check rules (if building requires landin on it, then move to buildables)
 	}
 
   public int getPrice() {
@@ -36,5 +57,8 @@ public abstract class Property extends Tile{
   public void setOwner(Player owner) {
     this.owner = owner;
   }
+
+  public abstract int determinRent();
+
 
 }

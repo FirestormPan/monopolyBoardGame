@@ -8,12 +8,11 @@ public class App {
 
     GameManager gm = new GameManager();
     for (Tile tile: gm.board.getTiles()){
-      if (tile != null)
-      System.out.println("Tile "+ tile.getPosition() + ": " + tile.getName());
+      if (tile != null){
+       System.out.println("Tile "+ tile.getPosition() + ": " + tile.getName());
+      }
     }
 //	  gm.getTheGameRunningBre();
-//    App.test();
-
 
   }
 }

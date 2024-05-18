@@ -72,5 +72,9 @@ public class Buildable extends Property {
 
 	}
 
+  public int determinRent(){
+    return rentPricesPerHouse[housesBuilt];
+  }
+
 
 }

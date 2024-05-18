@@ -8,11 +8,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Player {
-	private int balance;
+  private int balance;
 	private String colour;
   @Getter @Setter
 	private int position;
-	private List<Property> ownerships;
+  private List<Property> ownerships;
   private boolean isInGame;
 	private boolean isPrisoned;
 
@@ -42,6 +42,14 @@ public class Player {
 		return balance;
 
 	}
+  public List<Property> getOwnerships() {
+    return ownerships;
+  }
+
+  public void setOwnerships(List<Property> ownerships) {
+    this.ownerships = ownerships;
+  }
+
 
 	public void payRentTo(Player landowner,int rent) {
     if(this.balance >= rent){
@@ -50,10 +58,15 @@ public class Player {
     }else{
       //TODO: ypo8hkes? lose instantly?
     }
-
 	}
 
+  public int getBalance() {
+    return balance;
+  }
 
+  public void setBalance(int balance) {
+    this.balance = balance;
+  }
   public boolean setIsPrisoned(boolean prisoned) {
     isPrisoned = prisoned;
     if(prisoned){

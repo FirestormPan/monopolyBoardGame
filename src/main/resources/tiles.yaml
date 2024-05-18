@@ -13,7 +13,7 @@ properties:
         - 50
         - 65
         - 140
-    - position: 2
+    - position: 3
       colour: brown
       name: Pylaia
       price: 65
@@ -29,6 +29,10 @@ properties:
       name: larisis
       price: 200
   companies: []
+taxes:
+  - position: 4
+    name: Tax
+    taxAmount: 200
 entoles:
   - position: 2
     name: Apofasi
