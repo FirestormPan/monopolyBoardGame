@@ -12,7 +12,7 @@ public class TrainProperty extends Property {
 		// TODO Auto-generated constructor stub
 	}
 
-  public int determinRent() {
+  public int determineRent() {
     Player ownerOfStation = this.getOwner();
     int tottalStationsOwnedByOwner = (int) ownerOfStation.getOwnerships().stream().filter(TrainProperty.class::isInstance).count();
     int rentPrice = rentPricesPerStation[tottalStationsOwnedByOwner];

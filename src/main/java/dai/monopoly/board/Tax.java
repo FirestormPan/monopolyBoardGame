@@ -16,7 +16,6 @@ public class Tax extends Tile {
   public int getTaxAmount() {
     return taxAmount;
   }
-
   public void setTaxAmount(int taxAmount) {
     this.taxAmount = taxAmount;
   }

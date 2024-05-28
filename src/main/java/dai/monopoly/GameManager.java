@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 import dai.monopoly.board.Board;
 import dai.monopoly.board.models.BoardModel;
@@ -32,8 +33,8 @@ public class GameManager {
    * Runs through a queue of players until there is only one player remaining in the game
    */
   public void getTheGameRunningBre() {
-		boolean conditionForEnd = false;
-		while( !conditionForEnd ) {
+		boolean gameContinues = true;
+		while( gameContinues) {
 			//determine turn player
 			Player turnPlayer = activePlayers.remove();
 			//make actions for them
@@ -42,7 +43,7 @@ public class GameManager {
       if( turnPlayer.isInGame() ){
         activePlayers.add(turnPlayer);
       }
-			conditionForEnd = activePlayers.size()>1;
+      gameContinues = activePlayers.size()>1;
 		}
 	}
 
@@ -53,7 +54,7 @@ public class GameManager {
    */
 	public void makeTurnMovesFor(Player player, int consecutiveTimePlaying) {
 		int[] diceResults = rollDice();
-
+    System.out.println("Player " + player.getColour() + " rolled :" + + diceResults[0] + " , " + diceResults[1]);
 		// check for jailed
 		if(player.isJailed()) {
       //ask player to pay for getting out of jail
@@ -64,21 +65,26 @@ public class GameManager {
         if(player.isJailed()){ //if they are still jailed, it means the dice results are not the same, so end their turn
           return;
         }else{ //if they are the same results(and he got out of jail), play again because of the double roll
-          diceResults=rollDice();
+          System.out.println("Congratulations! You got out of Jail by double rolling");
+          diceResults=rollDice(); //we just roll dice and continue the function, no need to call it again
+          System.out.println("Player " + player.getColour() + " rolled : " + diceResults[0] + " , " + diceResults[1]);
         }
       }
 
 		}
 
-		Tile landingTile = board.movePlayerBy(player, (diceResults[0] + diceResults[1]) );;
+		Tile landingTile = Board.movePlayerBy(player, (diceResults[0] + diceResults[1]) );
+    System.out.println("Player " + player + "landed on :" + landingTile.getName());
 		//do  landing actions
 		landingTile.landingActions(player);
 		// if it was a double roll, play again
 		if(diceResults[0] == diceResults[1]) {
       consecutiveTimePlaying++;
       if(consecutiveTimePlaying == 3){ //third time you roll doubles, go to Jail
+        System.out.println("It was the third time you rolled doubles. GO TO JAIL");
         player.setIsPrisoned(true);
       }else{
+        System.out.println("You rolled doubles! You play again!");
         makeTurnMovesFor(player, consecutiveTimePlaying);
       }
 		}
@@ -86,10 +92,14 @@ public class GameManager {
 
   public boolean askPayToUnJail(Player player){
     // ask in gui for paying
-    boolean playerWantsToPay = true; //TODO: ask for changing from the console or GUI
+    Scanner unjailScanner = new Scanner(System.in);  // Create a Scanner object
+    System.out.println("Would you like to pay 100 to get out of jail? (Y(es) or N(o))");
+    String playerAnswer = unjailScanner.nextLine();  // Read user input
+
+    boolean playerWantsToPay = playerAnswer.equals("Y") || playerAnswer.equals("Yes"); //TODO: ask for changing from the console or GUI
     if(playerWantsToPay) {
       player.setIsPrisoned(false);
-      player.changeBalanceBy(-100); //or however much it is to be paid for getting out
+      player.changeBalanceBy(-100);
     }
     return playerWantsToPay;
   }
@@ -106,10 +116,10 @@ public class GameManager {
    */
   private Queue<Player> insetPayers() {
     //get the insertion of players and create them
-    //    activePlayers.add(new Player("green"));
-    //		activePlayers.add(new Player("red"));
+        activePlayers.add(new Player("green"));
+    		activePlayers.add(new Player("red"));
     //		activePlayers.add(new Player("yellow"));
-    return null;
+    return activePlayers;
   }
 
   public BoardModel getTilesFromFile(){

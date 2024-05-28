@@ -11,7 +11,7 @@ public class Company extends Property {
 		super(name, position, price);
 	}
 
-  public int determinRent() {
+  public int determineRent() {
     Player ownerOfCompany = this.getOwner();
     int totalCompaniesOwnedByOwner = (int) ownerOfCompany.getOwnerships().stream().filter(Company.class::isInstance).count();
 

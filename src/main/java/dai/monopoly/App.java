@@ -12,7 +12,7 @@ public class App {
        System.out.println("Tile "+ tile.getPosition() + ": " + tile.getName());
       }
     }
-//	  gm.getTheGameRunningBre();
+	  gm.getTheGameRunningBre();
 
   }
 }

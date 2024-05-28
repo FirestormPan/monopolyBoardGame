@@ -9,6 +9,7 @@ import lombok.Setter;
 
 public class Player {
   private int balance;
+  @Getter
 	private String colour;
   @Getter @Setter
 	private int position;
@@ -16,13 +17,13 @@ public class Player {
   private boolean isInGame;
 	private boolean isPrisoned;
 
-	public Player(int id, int position) {
+	public Player( String colour) {
 		this.colour = colour;
-		this.balance = 400;
-		this.position = position;
+		this.balance = 1500;
+		this.position = 0;
 		this.ownerships = new ArrayList();
-		this.isPrisoned = jailStatus(this.position);
-		this.isInGame = playerStatus(this.balance);
+		this.isPrisoned = false;
+		this.isInGame = true;
 
 	}
 

@@ -19,10 +19,9 @@ public abstract class Property extends Tile{
 	}
 
 	public void landingActions(Player rechiverOfActions) {
-
     Scanner myScanner = new Scanner(System.in);  // Create a Scanner object
 
-    if(owner == null){
+    if(owner == null){ //TODO: or maybe initial owner is bank?
       System.out.println("Would you like to buy the property " + this.getName() + " . Press y to buy"); //todo: delete after teh gui is implemented
       String decision = myScanner.nextLine();
       boolean playerWantsToBuy = decision.equals("y");
@@ -31,12 +30,15 @@ public abstract class Property extends Tile{
           rechiverOfActions.changeBalanceBy(-price);
           this.setOwner(rechiverOfActions);
           rechiverOfActions.getOwnerships().add(this);
+          System.out.println("you bought " + this.getName());
+        }else{
+          System.out.println("you don't have enough money to buy"); //TODO replace with gui output
         }
       }
     }else if(owner == rechiverOfActions){
 		  //else if(owned by me), build? idk we should check rules (if building requires landin on it, then move to buildables)
     }else{  //owned by another player
-      rechiverOfActions.payRentTo(this.owner, this.determinRent());
+      rechiverOfActions.payRentTo(this.owner, this.determineRent());
     }
 
 		//else if(not owned), ask player about buying it
@@ -58,7 +60,7 @@ public abstract class Property extends Tile{
     this.owner = owner;
   }
 
-  public abstract int determinRent();
+  public abstract int determineRent();
 
 
 }
