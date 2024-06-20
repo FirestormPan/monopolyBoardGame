@@ -64,12 +64,24 @@ public class Buildable extends Property {
   }
 
 
-	public void buildHotel(){
-
-	}
-
 	public void buildHouse() {
 
+    if( this.housesBuilt>4){
+      System.out.println("can't build more than a hotel on a property");
+      return;
+    }
+
+    System.out.println("Would you like to build a house/hotel?");
+    boolean answer =true;
+    if( answer ){
+      if(this.housesBuilt<4){
+        this.housesBuilt++;
+        System.out.println("you built a house on " + this.getName());
+      }else if(this.housesBuilt==4){
+        this.housesBuilt++;
+        System.out.println("you built a hotel on " + this.getName());
+      }
+    }
 	}
 
   public int determineRent(){

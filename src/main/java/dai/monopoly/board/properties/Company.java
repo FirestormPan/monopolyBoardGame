@@ -5,7 +5,9 @@ import dai.monopoly.Player;
 
 public class Company extends Property {
 
-  private final int[] multiplierPerCompanyOwned= new int[] {4,20};
+  private final int[] multiplierPerCompanyOwned= new int[] {4,10};
+
+  public Company(){}
 
 	public Company(String name, int position, int price) {
 		super(name, position, price);

@@ -22,8 +22,7 @@ public class Tax extends Tile {
 
 	@Override
 	public void landingActions(Player reciverOfActions) {
-
-
+    reciverOfActions.payToBank(this.taxAmount);
 	}
 
 }

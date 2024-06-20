@@ -13,7 +13,9 @@ public class GoJailTile extends Tile {
 	@Override
 	public void landingActions(Player rechiverOfActions) {
 		//TODO Tell board to move them to Jail, and change status to prisoned
-		throw new UnsupportedOperationException("Feature under development");
+		Board.movePlayerTo(rechiverOfActions, Board.getTiles()[10]);
+    rechiverOfActions.setIsPrisoned(true);
+
 	}
 
 

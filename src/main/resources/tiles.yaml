@@ -3,41 +3,308 @@ properties:
   buildables:
     - position: 1
       colour: brown
-      name: Harilaou
+      name: MEDITERRANEAN AVENUE
       price: 60
-      housePrice: 20
+      housePrice: 50
       rentPricesPerHouse:
-        - 20
-        - 25
-        - 35
-        - 50
-        - 65
-        - 140
+        - 2
+        - 10
+        - 30
+        - 90
+        - 160
+        - 250
     - position: 3
       colour: brown
-      name: Pylaia
-      price: 65
-      housePrice: 20
+      name: BALTIC AVENUE
+      price: 60
+      housePrice: 50
       rentPricesPerHouse:
+        - 4
         - 20
-        - 35
-        - 50
-        - 65
-        - 140
+        - 60
+        - 180
+        - 320
+        - 450
+    - position: 6
+      colour: light blue
+      name: ORIENTAL AVENUE
+      price: 100
+      housePrice: 50
+      rentPricesPerHouse:
+       - 6
+       - 30
+       - 90
+       - 270
+       - 400
+       - 550
+    - position: 8
+      colour: light blue
+      name: VERMONT AVENUE
+      price: 100
+      housePrice: 50
+      rentPricesPerHouse:
+       - 6
+       - 30
+       - 90
+       - 270
+       - 400
+       - 550
+    - position: 9
+      colour: light blue
+      name: CONNECTICUT AVENUE
+      price: 120
+      housePrice: 50
+      rentPricesPerHouse:
+       - 8
+       - 40
+       - 100
+       - 300
+       - 450
+       - 600
+    - position: 11
+      colour: pink
+      name: ST. CHARLES PLACE
+      price: 140
+      housePrice: 100
+      rentPricesPerHouse:
+       - 10
+       - 50
+       - 150
+       - 450
+       - 625
+       - 750
+    - position: 13
+      colour: pink
+      name: STATES AVENUE
+      price: 140
+      housePrice: 140
+      rentPricesPerHouse:
+       - 10
+       - 50
+       - 150
+       - 450
+       - 625
+       - 750
+    - position: 14
+      colour: pink
+      name: VIRGINIA AVENUE
+      price: 160
+      housePrice: 100
+      rentPricesPerHouse:
+       - 12
+       - 60
+       - 180
+       - 500
+       - 700
+       - 900
+    - position: 16
+      colour: orange
+      name: ST. JAMES PLACE
+      price: 180
+      housePrice: 100
+      rentPricesPerHouse:
+       - 14
+       - 70
+       - 200
+       - 550
+       - 750
+       - 950
+    - position: 18
+      colour: orange
+      name: TENNESSEE AVENUE
+      price: 180
+      housePrice: 100
+      rentPricesPerHouse:
+       - 14
+       - 70
+       - 200
+       - 550
+       - 750
+       - 950
+    - position: 19
+      colour: orange
+      name: NEW YORK AVENUE
+      price: 200
+      housePrice: 100
+      rentPricesPerHouse:
+       - 16
+       - 80
+       - 220
+       - 600
+       - 800
+       - 1000
+    - position: 21
+      colour: red
+      name: KENTUCKY AVENUE
+      price: 220
+      housePrice: 150
+      rentPricesPerHouse:
+       - 18
+       - 90
+       - 250
+       - 700
+       - 875
+       - 1050
+    - position: 23
+      colour: red
+      name: INDIANA AVENUE
+      price: 220
+      housePrice: 150
+      rentPricesPerHouse:
+       - 18
+       - 90
+       - 250
+       - 700
+       - 875
+       - 1050
+    - position: 24
+      colour: red
+      name: ILLINOIS AVENUE
+      price: 240
+      housePrice: 150
+      rentPricesPerHouse:
+       - 20
+       - 100
+       - 300
+       - 750
+       - 925
+       - 1100
+    - position: 26
+      colour: yellow
+      name: ATLANTIC AVENUE
+      price: 260
+      housePrice: 150
+      rentPricesPerHouse:
+       - 22
+       - 110
+       - 330
+       - 800
+       - 975
+       - 1150
+    - position: 27
+      colour: yellow
+      name: VENTNOR AVENUE
+      price: 260
+      housePrice: 150
+      rentPricesPerHouse:
+       - 22
+       - 110
+       - 330
+       - 800
+       - 975
+       - 1150
+    - position: 29
+      colour: yellow
+      name: MARVIN GARDENS
+      price: 260
+      housePrice: 150
+      rentPricesPerHouse:
+      - 24
+      - 120
+      - 360
+      - 850
+      - 1025
+      - 1200
+    - position: 31
+      colour: green
+      name: PACIFIC AVENUE
+      price: 300
+      housePrice: 200
+      rentPricesPerHouse:
+       - 26
+       - 130
+       - 390
+       - 900
+       - 1100
+       - 1275
+    - position: 32
+      colour: green
+      name: NORTH CAROLINE AVENUE
+      price: 300
+      housePrice: 200
+      rentPricesPerHouse:
+       - 26
+       - 130
+       - 390
+       - 900
+       - 1100
+       - 1275
+    - position: 34
+      colour: green
+      name: PENNSYLVANIA AVENUE
+      price: 320
+      housePrice: 200
+      rentPricesPerHouse:
+       - 28
+       - 150
+       - 450
+       - 1000
+       - 1200
+       - 1400
+    - position: 37
+      colour: blue
+      name: PARK PLACE
+      price: 350
+      housePrice: 200
+      rentPricesPerHouse:
+       - 35
+       - 175
+       - 500
+       - 1100
+       - 1300
+       - 1500
+    - position: 39
+      colour: blue
+      name: BOARDWALK
+      price: 400
+      housePrice: 200
+      rentPricesPerHouse:
+       - 50
+       - 200
+       - 600
+       - 1400
+       - 1700
+       - 2000
   trains:
     - position: 5
-      name: larisis
+      name: READING RAILROAD
       price: 200
-  companies: []
+    - position: 15
+      name: PENNSYLVANIA RAILROAD
+      price: 200
+    - position: 25
+      name: B. & O. RAILROAD
+      price: 200
+    - position: 35
+      name: SHORT LINE
+      price: 200
+  companies:
+    - position: 12
+      name: ELECTRIC COMPANY
+      price: 150
+    - position: 28
+      name: WATER COMPANY
+      price: 150
 taxes:
   - position: 4
-    name: Tax
+    name: INCOME TAX
     taxAmount: 200
+  - position: 38
+    name: LUXURY TAX
+    taxAmount: 100
 entoles:
   - position: 2
-    name: Apofasi
-  - position: 8
-    name: Entoli
+    name: COMMUNITY CHEST
+  - position: 7
+    name: CHANCE
+  - position: 17
+    name: COMMUNITY CHEST
+  - position: 22
+    name: CHANCE
+  - position: 33
+    name: COMMUNITY CHEST
+  - position: 36
+    name: CHANCE
 start:
   position: 0
   name: Start
@@ -45,8 +312,8 @@ prison:
   position: 10
   name: Prison
 freeParking:
-  position: 14
+  position: 20
   name: Park Free
 goToJail:
-  position: 23
+  position: 30
   name: Go To Jail!

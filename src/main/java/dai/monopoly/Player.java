@@ -3,6 +3,9 @@ package dai.monopoly;
 import java.util.ArrayList;
 import java.util.List;
 
+import dai.monopoly.board.Board;
+import dai.monopoly.board.models.BoardModel;
+import dai.monopoly.board.properties.Buildable;
 import dai.monopoly.board.properties.Property;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +13,9 @@ import lombok.Setter;
 public class Player {
   private int balance;
   @Getter
-	private String colour;
+	private final String colour;
+  @Getter @Setter
+  private String name;
   @Getter @Setter
 	private int position;
   private List<Property> ownerships;
@@ -21,7 +26,7 @@ public class Player {
 		this.colour = colour;
 		this.balance = 1500;
 		this.position = 0;
-		this.ownerships = new ArrayList();
+		this.ownerships = new ArrayList<Property>();
 		this.isPrisoned = false;
 		this.isInGame = true;
 
@@ -34,7 +39,6 @@ public class Player {
 
 	public boolean playerStatus(int balance ) {
 		return (balance > 0);
-
 	}
 
 	public int changeBalanceBy(int payment) {
@@ -51,6 +55,16 @@ public class Player {
     this.ownerships = ownerships;
   }
 
+  public void payToBank(int payment) {
+    int balanceAfterPayment = balance-payment;
+    if(balanceAfterPayment>0){
+      this.balance=balanceAfterPayment;
+    }else{
+      // TODO: sell properties? lose?
+      isInGame=false;
+    }
+  }
+
 
 	public void payRentTo(Player landowner,int rent) {
     if(this.balance >= rent){
@@ -58,6 +72,8 @@ public class Player {
       landowner.changeBalanceBy(rent);
     }else{
       //TODO: ypo8hkes? lose instantly?
+
+      this.isInGame=false;
     }
 	}
 
@@ -68,12 +84,12 @@ public class Player {
   public void setBalance(int balance) {
     this.balance = balance;
   }
-  public boolean setIsPrisoned(boolean prisoned) {
+
+  public void setIsPrisoned(boolean prisoned) {
     isPrisoned = prisoned;
     if(prisoned){
       this.position=10;
     }
-    return prisoned;
   }
 
   public boolean isJailed(){
@@ -86,6 +102,17 @@ public class Player {
 
   public void setInGame(boolean inGame) {
     isInGame = inGame;
+  }
+
+  public boolean ownsFullSetFor(Buildable property){
+    String colour = property.getColour();
+
+    for( Buildable buildable: Board.findTilesOfColour(colour)){
+      if (buildable.getOwner() != this ){
+        return false;
+      }
+    }
+    return true;
   }
 
 }

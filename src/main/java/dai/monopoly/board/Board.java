@@ -7,9 +7,12 @@ import dai.monopoly.board.properties.Company;
 import dai.monopoly.board.properties.TrainProperty;
 import lombok.Getter;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class Board {
 
-  private static final int SIZE_OF_BOARD = 36;
+  private static final int SIZE_OF_BOARD = 40;
 
 
   @Getter
@@ -19,14 +22,15 @@ public class Board {
 	 * Initializes the board with its tiles. Gets called in Gamemaster
 	 * @param boardModel the model from which the tiles will be extracted
 	 */
-	public Board(BoardModel boardModel)  { //probably load the orderedTiles from a File OR create the table here based on Tile.position
-		//corners
+	public Board(BoardModel boardModel)  {
+
+    //corners
     tiles[boardModel.getPrison().getPosition()] =  boardModel.getPrison();
     tiles[boardModel.getStart().getPosition()] =boardModel.getStart();
     tiles[boardModel.getGoToJail().getPosition()] = boardModel.getGoToJail();
     tiles[boardModel.getFreeParking().getPosition()] = boardModel.getFreeParking();
 
-    for(EntoliOrApofasi entoli : boardModel.getEntoles()){
+    for(Entoli entoli : boardModel.getEntoles()){
        tiles[entoli.getPosition()] = entoli;
     }
     for (Buildable bProperty : boardModel.getProperties().getBuildables()){
@@ -43,13 +47,15 @@ public class Board {
     }
 	}
 
-	public static void movePlayerTo(Player playerToMove, Tile destination) {
+	public static Tile movePlayerTo(Player playerToMove, Tile destination) {
     int oldPosition = playerToMove.getPosition();
     int newPosition = destination.getPosition();
     playerToMove.setPosition(newPosition); //move the player
 
     boolean passedStart = newPosition < oldPosition;
     if(passedStart) {playerToMove.changeBalanceBy(200); } //an perasei apo thn afaithria pare 200
+
+    return tiles[newPosition];
 	}
 
 
@@ -69,4 +75,30 @@ public class Board {
 
 		return tiles[newPosition];
 	}
+
+  public static Tile findTileByName(String tileName){
+    for(Tile tile : tiles){
+      if (tile.getName().equals(tileName))
+        return tile;
+    }
+    return null;
+  }
+
+  public static List<Buildable> findTilesOfColour( String colour){
+    return Arrays.stream(tiles)
+      .filter(tile -> tile instanceof Buildable && ((Buildable) tile).getColour().equals(colour))
+      .map(tile -> (Buildable) tile)
+      .collect(Collectors.toList());
+  }
+
+
+  public static <T> Tile findClosestTileOfSubClass(int currentPosition, Class<T> tileClass) {
+    return Arrays.stream(tiles)
+      .filter(tileClass::isInstance)
+      .min((tile1, tile2) -> Integer.compare(
+        Math.abs(tile1.getPosition() - currentPosition),
+        Math.abs(tile2.getPosition() - currentPosition)))
+      .orElse(null);
+  }
+
 }

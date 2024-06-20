@@ -10,20 +10,23 @@ import java.util.Scanner;
 import dai.monopoly.board.Board;
 import dai.monopoly.board.models.BoardModel;
 import dai.monopoly.board.Tile;
+import dai.monopoly.board.properties.Property;
+import lombok.Getter;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 public class GameManager {
 
-	Queue<Player> activePlayers = new LinkedList<>();
+  @Getter
+	private static Queue<Player> activePlayers = new LinkedList<>();
 	Board board;
 
 	public GameManager(){
 		BoardModel tiles = this.getTilesFromFile();
 		this.board = new Board(tiles);
 
-    this.activePlayers = insetPayers();
+    activePlayers = insetPayers();
 
     //generateGui(Board, activePlayers)
 	}
@@ -39,10 +42,14 @@ public class GameManager {
 			Player turnPlayer = activePlayers.remove();
 			//make actions for them
       makeTurnMovesFor(turnPlayer, 1);
+
 			//if player didn't lose, put player back to queue
       if( turnPlayer.isInGame() ){
         activePlayers.add(turnPlayer);
       }
+
+      printGameState(); //todo: remove when gui comes to play
+
       gameContinues = activePlayers.size()>1;
 		}
 	}
@@ -54,7 +61,7 @@ public class GameManager {
    */
 	public void makeTurnMovesFor(Player player, int consecutiveTimePlaying) {
 		int[] diceResults = rollDice();
-    System.out.println("Player " + player.getColour() + " rolled :" + + diceResults[0] + " , " + diceResults[1]);
+    System.out.println("Player " + player.getColour() + " rolled :" + + diceResults[0] + " and " + diceResults[1]);
 		// check for jailed
 		if(player.isJailed()) {
       //ask player to pay for getting out of jail
@@ -74,7 +81,7 @@ public class GameManager {
 		}
 
 		Tile landingTile = Board.movePlayerBy(player, (diceResults[0] + diceResults[1]) );
-    System.out.println("Player " + player + "landed on :" + landingTile.getName());
+    System.out.println("Player " + player.getColour() + " landed on: " + landingTile.getName());
 		//do  landing actions
 		landingTile.landingActions(player);
 		// if it was a double roll, play again
@@ -88,6 +95,7 @@ public class GameManager {
         makeTurnMovesFor(player, consecutiveTimePlaying);
       }
 		}
+
 	}
 
   public boolean askPayToUnJail(Player player){
@@ -96,7 +104,7 @@ public class GameManager {
     System.out.println("Would you like to pay 100 to get out of jail? (Y(es) or N(o))");
     String playerAnswer = unjailScanner.nextLine();  // Read user input
 
-    boolean playerWantsToPay = playerAnswer.equals("Y") || playerAnswer.equals("Yes"); //TODO: ask for changing from the console or GUI
+    boolean playerWantsToPay = playerAnswer.equals("Y") || playerAnswer.equals("Yes") || playerAnswer.equals("y"); //TODO: ask for changing from the console or GUI
     if(playerWantsToPay) {
       player.setIsPrisoned(false);
       player.changeBalanceBy(-100);
@@ -105,6 +113,7 @@ public class GameManager {
   }
 
 	public static int[] rollDice() {
+//    return new int []{2,4};
 		return new int [] {
 			(int) Math.ceil(Math.random() * 6), //Math.random doesn't return 0 ever, so we good
 			(int) Math.ceil(Math.random() * 6)
@@ -137,5 +146,17 @@ public class GameManager {
     }
     return tiles;
 	}
+
+  public void printGameState(){ //TODO: rename to updateGameState and update the GUI instead of printing
+    System.out.println("=======New Game State======");
+    for(Player player: getActivePlayers()){
+      System.out.println(player.getColour() +  "| Balance: " +  player.getBalance() + " |Position: " + player.getPosition() +  " |Ownerships: ");
+      for (Property property: player.getOwnerships()){
+        System.out.println(property.getName());
+      }
+      System.out.println("-------------------------------------");
+    }
+      System.out.println("==============================");
+  }
 
 }
